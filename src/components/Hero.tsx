@@ -7,7 +7,6 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Hero() {
   const scrollToContact = () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-  const scrollToProjects = () => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 text-center">
@@ -76,9 +75,6 @@ export default function Hero() {
         >
           <button onClick={scrollToContact} className="btn-pill btn-pill-filled">
             <span>👋</span> Let&apos;s Connect
-          </button>
-          <button onClick={scrollToProjects} className="btn-pill">
-            View Projects <span className="text-[#4d96ff]">→</span>
           </button>
         </motion.div>
       </div>
