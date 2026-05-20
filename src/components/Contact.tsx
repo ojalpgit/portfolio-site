@@ -18,14 +18,28 @@ export default function Contact() {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
+  const [error, setError] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setSending(false);
-    setSent(true);
-    setForm({ name: "", email: "", message: "" });
-    setTimeout(() => setSent(false), 4000);
+    setError(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Send failed");
+      setSent(true);
+      setForm({ name: "", email: "", message: "" });
+      setTimeout(() => setSent(false), 5000);
+    } catch {
+      setError(true);
+      setTimeout(() => setError(false), 4000);
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputClass = "w-full px-4 py-3 rounded-xl bg-[#0a0a0a] border border-[#1e1e1e] text-white placeholder:text-[#333] text-sm font-[var(--font-outfit)] focus:outline-none focus:border-[#4d96ff]/50 transition-colors";
@@ -55,8 +69,9 @@ export default function Contact() {
             <textarea required rows={5} placeholder="What's on your mind?" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className={`${inputClass} resize-none`} />
           </div>
           <button type="submit" disabled={sending || sent} className="btn-pill btn-pill-filled w-full justify-center py-3 disabled:opacity-60">
-            {sent ? "Sent ✓" : sending ? "Sending..." : "Send Message"}
+            {sent ? "Message sent ✓" : sending ? "Sending..." : error ? "Failed — try again" : "Send Message"}
           </button>
+          {error && <p className="text-red-400 text-xs text-center">Something went wrong. Please email me directly at ojalprasad@gmail.com</p>}
         </motion.form>
 
         <motion.div
