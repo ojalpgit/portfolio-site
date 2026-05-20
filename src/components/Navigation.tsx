@@ -30,13 +30,48 @@ const navItems = [
     ),
   },
   {
-    id: "projects",
-    href: "#projects",
-    label: "Projects",
+    id: "experience",
+    href: "#experience",
+    label: "Experience",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+        <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+      </svg>
+    ),
+  },
+  {
+    id: "leadership",
+    href: "#leadership",
+    label: "Activities",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 00-3-3.87" />
+        <path d="M16 3.13a4 4 0 010 7.75" />
+      </svg>
+    ),
+  },
+  {
+    id: "skills",
+    href: "#skills",
+    label: "Skills",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="16 18 22 12 16 6" />
         <polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
+  },
+  {
+    id: "education",
+    href: "#education",
+    label: "Education",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+        <path d="M6 12v5c3 3 9 3 12 0v-5" />
       </svg>
     ),
   },
@@ -133,7 +168,7 @@ export default function Navigation() {
       >
         {/* Nav icons */}
         {navItems.map((item) => {
-          const isActive = isHomePage && (activeSection === item.id || (item.id === "projects" && ["projects", "research", "skills", "experience", "education", "leadership"].includes(activeSection)));
+          const isActive = isHomePage && activeSection === item.id;
           const cls = `relative w-9 h-9 flex items-center justify-center rounded-full transition-all duration-200 ${
             isActive ? "bg-white/10 text-white" : "text-[#555] hover:text-white hover:bg-white/[0.06]"
           }`;
